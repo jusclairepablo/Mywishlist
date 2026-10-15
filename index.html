@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock My Wishlist 💛</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 25px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #fff9df, #ffed9c);
+  color: #59491f;
+}
+
+.card {
+  background: #fffef8;
+  width: 100%;
+  max-width: 470px;
+  padding: 30px 24px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 8px 25px #d7bf6655;
+  border: 1px solid #f7e6a0;
+}
+
+.flower { font-size: 55px; }
+
+h1 { color: #d1a400; font-size: 28px; }
+h2 { font-size: 21px; line-height: 1.5; }
+
+p { line-height: 1.7; }
+
+.subtitle { color: #8c7a49; }
+
+.progress {
+  display: inline-block;
+  background: #fff0a9;
+  padding: 8px 17px;
+  border-radius: 30px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f0d879;
+  border-radius: 12px;
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 13px;
+  padding: 14px;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ffdc50;
+  color: #594716;
+}
+
+button:hover { background: #f3cb2e; }
+
+.message {
+  font-weight: bold;
+  margin-top: 17px;
+  line-height: 1.7;
+}
+
+.wrong { color: #cb6464; }
+.correct { color: #b28b00; }
+
+.clue {
+  background: #fff7d3;
+  border: 1px dashed #dcb82e;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 23px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.hidden { display: none !important; }
+
+.wishlist {
+  text-align: left;
+  padding: 0;
+  list-style: none;
+}
+
+.wishlist li {
+  background: #fff8d9;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 13px;
+  line-height: 1.6;
+}
+
+.wishlist a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #876500;
+  font-weight: bold;
+}
+
+.footer {
+  font-size: 13px;
+  color: #9b8955;
+  margin-top: 25px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #f0e2a9;
+  margin: 22px 0;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+
+  <!-- WELCOME -->
+  <section id="welcome">
+    <div class="flower">🎀🌼</div>
+    <h1>Welcome!</h1>
+
+    <p>
+      You are so lucky to be here to witness
+      and to know me a little bit. 💛
+    </p>
+
+    <p>
+      But first, you need to answer a few questions
+      before you can unlock my wishlist.
+    </p>
+
+    <p>Ready ka na ba? HAHAHAHA</p>
+
+    <button onclick="show('q1')">Let's go! 💌</button>
+  </section>
+
+
+  <!-- QUESTION 1 -->
+  <section id="q1" class="hidden">
+    <span class="progress">QUESTION 1</span>
+    <div class="flower">😭</div>
+
+    <h2>Who's more dramatic, me or you?</h2>
+
+    <input id="a1" placeholder="Me or you?">
+
+    <button onclick="check1()">Submit Answer</button>
+    <div id="m1" class="message"></div>
+
+    <button id="n1" class="hidden" onclick="show('q2')">
+      Next Question →
+    </button>
+  </section>
+
+
+  <!-- QUESTION 2 -->
+  <section id="q2" class="hidden">
+    <span class="progress">QUESTION 2</span>
+    <div class="flower">🤨</div>
+
+    <h2>Rate my attitude from 1–10.</h2>
+
+    <p class="subtitle">
+      Be honest. Walang judgment dito. HAHAHA
+    </p>
+
+    <input id="a2" type="number" min="1" max="10"
+      placeholder="Rate me from 1 to 10">
+
+    <button onclick="check2()">Submit Answer</button>
+    <div id="m2" class="message"></div>
+
+    <button id="n2" class="hidden" onclick="show('q3')">
+      Next Question →
+    </button>
+  </section>
+
+
+  <!-- QUESTION 3 -->
+  <section id="q3" class="hidden">
+    <span class="progress">QUESTION 3</span>
+    <div class="flower">🎨</div>
+
+    <h2>What's my favorite color?</h2>
+    <p class="subtitle">Hint: Y___ ☀️</p>
+
+    <input id="a3" placeholder="What's your guess?">
+
+    <button onclick="check3()">Submit Answer</button>
+    <div id="m3" class="message"></div>
+
+    <button id="n3" class="hidden" onclick="show('q4')">
+      Next Question →
+    </button>
+  </section>
+
+
+  <!-- QUESTION 4 -->
+  <section id="q4" class="hidden">
+    <span class="progress">QUESTION 4</span>
+    <div class="flower">💌</div>
+
+    <h2>What's my middle name?</h2>
+
+    <p class="subtitle">
+      Here's a rumble word for u para di ka mahirapan naman.
+    </p>
+
+    <div class="clue">OBAY</div>
+
+    <input id="a4" placeholder="Unscramble the letters">
+
+    <button onclick="check4()">Submit Answer</button>
+    <div id="m4" class="message"></div>
+
+    <button id="n4" class="hidden" onclick="show('q5')">
+      Next Question →
+    </button>
+  </section>
+
+
+  <!-- QUESTION 5 -->
+  <section id="q5" class="hidden">
+    <span class="progress">QUESTION 5</span>
+    <div class="flower">🎵</div>
+
+    <h2>What's my favorite song nung 19 years old ako?</h2>
+
+    <p class="subtitle">
+      Here's your clue. Good luck guessing! 🤫
+    </p>
+
+    <div class="clue"
+         style="letter-spacing: 1px; font-size: 18px;">
+      Words: 5<br>
+      Syllables: 10<br>
+      Tagalog: “Never, ever tell”
+    </div>
+
+    <input id="a5" placeholder="Guess the song title">
+
+    <button onclick="check5()">Submit Answer</button>
+    <div id="m5" class="message"></div>
+
+    <button id="n5" class="hidden" onclick="show('troll')">
+      Next Question →
+    </button>
+  </section>
+
+
+  <!-- THE TROLL SCREEN -->
+  <section id="troll" class="hidden">
+    <div class="flower">🎉🤡</div>
+
+    <h1>Congratulations!</h1>
+
+    <p>
+      You've officially wasted your time answering
+      all these questions.
+    </p>
+
+    <p>HAHAHAHAHAHAHAHA 😭</p>
+
+    <button onclick="show('last')">Next →</button>
+  </section>
+
+
+  <!-- ONE LAST THING -->
+  <section id="last" class="hidden">
+    <div class="flower">💛</div>
+
+    <h1>Ah ganon, sige next.</h1>
+
+    <p>
+      Akala mo tapos na? May isa ka pang gagawin.
+      HAHAHAHAHA
+    </p>
+
+    <button onclick="show('wishlist')">
+      Sige na nga, show my wishlist 🎁
+    </button>
+  </section>
+
+
+  <!-- WISHLIST -->
+  <section id="wishlist" class="hidden">
+    <div class="flower">🎀🌼💛</div>
+
+    <h1>MY WISH LIST</h1>
+
+    <p>
+      Since nandito ka na, eto na ang listahan.
+      Choose wisely. CHAROT. 😭
+    </p>
+
+    <hr>
+
+    <ul class="wishlist">
+
+      <li>
+        <strong>1. 🌼 Shein Lily Carpet — YELLOW</strong>
+        <p>
+          Lily-shaped velvet carpet.
+          YELLOW LANG PO, PLEASE.
+        </p>
+        <a href="https://ph.shein.com/1pc-Lily-Shaped-Velvet-Carpet-Soft-Plush-Room-Decor-Home-Supplies-Indoor-Doormat-Living-Room-Rug-Kitchen-Mat-Bedroom-Carpet-Bathroom-Mat-Home-Decoration-Bedroom-Decor-Bathroom-Decor-Wear-Resistant-Noise-Reducing-Skin-Friendly-Easy-To-Clean-p-526742174.html?main_attr=27_513"
+           target="_blank" rel="noopener noreferrer">
+          View on SHEIN ↗
+        </a>
+      </li>
+
+      <li>
+        <strong>2. 💡 Yellow Lamp</strong>
+        <p>
+          A cute yellow bedside lamp for my room.
+        </p>
+        <a href="https://shopee.ph/Creative-bedroom-desk-lamp-with-wireless-touch-and-simple-bedside-lighting-decoration-i.935419098.26615481136"
+           target="_blank" rel="noopener noreferrer">
+          View on Shopee ↗
+        </a>
+      </li>
+
+      <li>
+        <strong>3. 🎀 Hello Kitty from Miniso</strong>
+        <p>
+          Hello Kitty sa Miniso. Ubusin mo lahat
+          ng andon. THANK YOU. 😭💗
+        </p>
+      </li>
+
+      <li>
+        <strong>4. 🗄️ Four-Layer Drawer</strong>
+        <p>
+          Four layers ONLY, please!
+        </p>
+        <a href="https://shop.tiktok.com/ph/pdp/1730750000251111174"
+           target="_blank" rel="noopener noreferrer">
+          View on TikTok Shop ↗
+        </a>
+      </li>
+
+    </ul>
+
+    <hr>
+
+    <h2>💌 Reminder</h2>
+
+    <p>
+      Choose anything from the list.
+      No pressure naman. Hehehe. 💛
+    </p>
+
+    <p>
+      If may sukli pang meryenda mo na lang po. 😭
+    </p>
+
+    <div class="flower">🌼💛🎀</div>
+
+    <p class="footer">
+      Thank you for playing and getting to know me!
+      <br>
+      Made with love and konting kalokohan. 💛
+    </p>
+  </section>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll(".card > section").forEach(section => {
+    section.classList.add("hidden");
+  });
+
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function normalize(value) {
+  return value.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function checkAnswer(inputId, messageId, buttonId, accepted, success) {
+  const answer = normalize(document.getElementById(inputId).value);
+  const message = document.getElementById(messageId);
+
+  if (accepted(answer)) {
+    message.className = "message correct";
+    message.textContent = success;
+    document.getElementById(buttonId).classList.remove("hidden");
+  } else {
+    message.className = "message wrong";
+    message.textContent = answer
+      ? "Maliii HAHAHA. Try again! 😭"
+      : "Answer muna bago mag-next! 💛";
+  }
+}
+
+function check1() {
+  checkAnswer(
+    "a1", "m1", "n1",
+    answer => answer === "you",
+    "WOW GRABE KA HA. 😭 HAHAHAHAHA"
+  );
+}
+
+function check2() {
+  const value = document.getElementById("a2").value;
+
+  checkAnswer(
+    "a2", "m2", "n2",
+    answer => value.trim() !== "" &&
+      Number(value) >= 1 && Number(value) <= 10,
+    "HAHAHA okay, noted ang rating mo. Next na! 😂"
+  );
+}
+
+function check3() {
+  checkAnswer(
+    "a3", "m3", "n3",
+    answer => answer === "yellow",
+    "CORRECT!! YELLOW FOREVER! 💛🌼"
+  );
+}
+
+function check4() {
+  checkAnswer(
+    "a4", "m4", "n4",
+    answer => answer === "boya",
+    "CORRECT!! Galing mo naman. 💌"
+  );
+}
+
+function check5() {
+  checkAnswer(
+    "a5", "m5", "n5",
+    answer =>
+      answer === "huwag na huwag mong sasabihin" ||
+      answer === "huwag na huwag mo sasabihin",
+    "CORRECT!! Finally, tapos ka na! 🎵💛"
+  );
+}
+</script>
+
+</body>
+</html>
